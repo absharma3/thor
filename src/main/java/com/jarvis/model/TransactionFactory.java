@@ -37,20 +37,31 @@ public class TransactionFactory {
             return transaction;
         }
 
-        if("Sell".equalsIgnoreCase(lineData[3]) || "Buy".equalsIgnoreCase(lineData[3])){
+        if("Sell".equalsIgnoreCase(lineData[3])){
             Transaction transaction = new SellTransaction(lineData);
-            for(Transaction reverseTransaction: transactions){
-                if(reverseTransaction.compareTo(transaction) == 0){
-                    this.transactions.remove(reverseTransaction);
-                    Transaction transaction1 = new IntradayTransaction(reverseTransaction, transaction);
-                    this.transactions.add(transaction1);
-                    return transaction1;
-                }
-            }
-            this.transactions.add(transaction);
-            return transaction;
+            return this.findAndUpdateTransactions(transaction);
+        }
+
+        if("Buy".equalsIgnoreCase(lineData[3])){
+            Transaction transaction = new BuyTransaction(lineData);
+            return this.findAndUpdateTransactions(transaction);
         }
         return null;
 
     }
+
+
+    private Transaction findAndUpdateTransactions(Transaction transaction){
+        for(Transaction reverseTransaction: transactions){
+            if(reverseTransaction.compareTo(transaction) == 0){
+                this.transactions.remove(reverseTransaction);
+                Transaction transaction1 = new IntradayTransaction(transaction, reverseTransaction);
+                this.transactions.add(transaction1);
+                return transaction1;
+            }
+        }
+        this.transactions.add(transaction);
+        return transaction;
+    }
+
 }
