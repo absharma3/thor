@@ -1,7 +1,15 @@
 package com.jarvis.controller;
 
+import com.jarvis.model.Transaction;
+import com.jarvis.model.TransactionFactory;
+import com.jarvis.reader.CSVFileTransactionReader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * Created by abhimanyus on 3/23/18.
@@ -9,4 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/v1/api/fee")
 public class TransactionFeeController {
+
+    @Autowired
+    TransactionFactory transactionFactory;
+
+    @Autowired
+    CSVFileTransactionReader csvFileTransactionReader;
+
+    @RequestMapping(path = "/summary", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<Transaction> getSummary(){
+        csvFileTransactionReader.read();
+        return transactionFactory.getTransactions();
+    }
+
 }
