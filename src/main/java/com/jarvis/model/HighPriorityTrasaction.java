@@ -4,8 +4,12 @@ package com.jarvis.model;
  * Created by abhimanyus on 3/23/18.
  */
 public class HighPriorityTrasaction extends NormalTransaction {
+
+    private String transactionType;
+
     public HighPriorityTrasaction(String[] lineData) {
         super(lineData);
+        this.transactionType = lineData[3];
     }
 
     @Override
@@ -15,7 +19,7 @@ public class HighPriorityTrasaction extends NormalTransaction {
 
     @Override
     public String transactionType() {
-        return "High Priority";
+        return this.transactionType;
     }
 
     @Override

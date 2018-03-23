@@ -3,7 +3,6 @@ package com.jarvis.model;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ public class TransactionFactory {
             return transaction;
         }
         if("Withdraw".equalsIgnoreCase(lineData[3])){
-            Transaction transaction = new WithdrawTrasaction(lineData);
+            Transaction transaction = new WithdrawTransaction(lineData);
             this.transactions.add(transaction);
             return transaction;
         }

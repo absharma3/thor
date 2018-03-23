@@ -59,7 +59,7 @@ public class TransactionFactoryTest {
         TransactionFactory transactionFactory = new TransactionFactory();
         Transaction transaction = transactionFactory.getTransaction(data5);
         Assert.assertNotNull(transaction);
-        Assert.assertTrue(transaction instanceof WithdrawTrasaction);
+        Assert.assertTrue(transaction instanceof WithdrawTransaction);
     }
 
     @Test

@@ -23,7 +23,7 @@ public class IntradayTransaction implements Transaction {
 
     @Override
     public String transactionType() {
-        return "Intraday Transaction";
+        return "BUY/SELL";
     }
 
     @Override

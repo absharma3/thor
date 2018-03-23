@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class TransactionFeeController {
     CSVFileTransactionReader csvFileTransactionReader;
 
     @RequestMapping(path = "/summary", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<FeeSummary> getSummary(){
+    public @ResponseBody List<FeeSummary> getSummary(){
         List<FeeSummary> summaries = new ArrayList<FeeSummary>();
         csvFileTransactionReader.read();
         for(Transaction transaction : transactionFactory.getTransactions()){
