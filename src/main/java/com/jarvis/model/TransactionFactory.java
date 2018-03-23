@@ -19,6 +19,9 @@ public class TransactionFactory {
     }
 
     public Transaction getTransaction(String[] lineData) {
+
+        if(lineData == null || lineData.length <7)
+            return null;
         //check if priority flag is set
         if("Y".equalsIgnoreCase(lineData[6])){
             Transaction transaction = new HighPriorityTrasaction(lineData);

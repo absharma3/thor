@@ -33,6 +33,6 @@ public class CSVFileTransactionReader extends AbstractTransactionReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return transactionFactory.getTransactions();
     }
 }
